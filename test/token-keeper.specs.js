@@ -35,4 +35,18 @@ describe('Token Keeper Test', () => {
     const keyIsInEnv = key in process.env
     assert(!keyIsInEnv)
   })
+
+  it('should unset token after set null or undefined', () => {
+    let key = 'foo'
+    process.env[key] = 'bar'
+    let keeper = new TokenKeeper(key)
+    keeper.set(null)
+    let keyIsInEnv = key in process.env
+    assert(!keyIsInEnv)
+
+    process.env[key] = 'bar'
+    keeper.set(undefined)
+    keyIsInEnv = key in process.env
+    assert(!keyIsInEnv)
+  })
 })

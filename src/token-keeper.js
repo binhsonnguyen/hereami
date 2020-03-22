@@ -12,7 +12,13 @@ export class TokenKeeper {
   }
 
   set (value) {
-    process.env[this.getKey()] = value || ''
+    if (typeof value === 'string') {
+      process.env[this.getKey()] = value
+    } else if (value == null) {
+      this.unset()
+    } else {
+      process.env[this.getKey()] = value
+    }
   }
 
   unset () {
