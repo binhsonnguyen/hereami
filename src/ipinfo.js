@@ -1,4 +1,8 @@
 class IpInfo {
+  async getIpSpecs (token) {
+    return null
+  }
+
   getAccessToken () {
     return process.env['IP_INFO_TOKEN']
   }

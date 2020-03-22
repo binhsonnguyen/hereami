@@ -8,4 +8,10 @@ describe('Ping IpInfo Test', () => {
     const actual = ipinfo.getAccessToken()
     assert.equal(actual, token)
   })
+
+  it('should get ip information', async function () {
+    const token = ipinfo.getAccessToken()
+    const specs = await ipinfo.getIpSpecs(token)
+    assert(specs != null)
+  })
 })
