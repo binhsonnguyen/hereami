@@ -5,10 +5,6 @@ const axios = require('axios')
 class IpInfo {
   constructor () {
     this.ipInfoToken = new TokenKeeper('IP_INFO_TOKEN')
-    axios.interceptors.request.use(request => {
-      console.log('Starting Request', request)
-      return request
-    })
   }
 
   async getIpSpecs () {

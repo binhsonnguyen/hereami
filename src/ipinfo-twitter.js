@@ -1,30 +1,34 @@
 import { TokenKeeper } from './token-keeper'
+import ipinfo from './ipinfo'
 
 const axios = require('axios')
 
-class IpInfoTwitter {
+export class IpInfoTwitter {
   constructor () {
     this.twitterToken = new TokenKeeper('TWITTER_TOKEN')
     this.twitterUrl = new TokenKeeper('TWITTER_URL')
-    axios.interceptors.request.use(request => {
-      console.log('Starting Request', request)
-      return request
-    })
+    this.interval = new TokenKeeper('TWITTER_INTERVAL')
   }
 
-  async tweet () {
+  start () {
+    setTimeout(async () => {
+      try {
+        await this.tweet(await ipinfo.getIpSpecs())
+        console.log('-----------------------------------------------------------------')
+      } catch (e) {
+        console.error('co loi', e.message)
+      }
+      this.start()
+    }, this.interval.getValue() || 30000)
+  }
+
+  async tweet (ipInfo) {
     const token = this.twitterToken.getValue()
-    let data = { token: token }
-    const response = await axios.post(this.getTwitterUrl(), data)
+    const data = { token: token, ipInfo: ipInfo }
+    return await axios.post(this.getTwitterUrl(), data)
   }
 
   getTwitterUrl () {
-    const url = this.twitterUrl.getValue() || ''
-    return encodeURI(url)
+    return encodeURI(this.twitterUrl.getValue() || '')
   }
 }
-
-const ipInfoTwitter = new IpInfoTwitter()
-Object.freeze(ipInfoTwitter)
-
-export default ipInfoTwitter

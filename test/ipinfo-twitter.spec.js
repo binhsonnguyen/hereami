@@ -1,7 +1,8 @@
 import { TokenKeeper } from '../src/token-keeper'
-import ipInfoTwitter from '../src/ipinfo-twitter'
+import { IpInfoTwitter } from '../src/ipinfo-twitter'
 
 const assert = require('assert')
+const ipInfoTwitter = new IpInfoTwitter()
 
 const twitterToken = new TokenKeeper('TWITTER_TOKEN')
 const originalTwitterToken = twitterToken.getValue()
