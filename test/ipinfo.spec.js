@@ -27,7 +27,7 @@ describe('Ping IpInfo Test', () => {
   it('should generate right access url', () => {
     const token = 'foo bar'
     placeTokenEnv(token)
-    const url = `https://ipinfo.io?token=${token}`
+    const url = `https://ipinfo.io?token=${encodeURI(token)}`
     const actual = ipinfo.getAccessUrl()
     assert.equal(actual, url)
   })
