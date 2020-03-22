@@ -15,11 +15,8 @@ class IpInfoTwitter {
   }
 
   getTwitterUrl () {
-    const token = this.twitterToken.getValue() || ''
     const url = this.twitterUrl.getValue() || ''
-    let uri = `${url}?token=${token}`
-    console.log(token, url, uri)
-    return encodeURI(uri)
+    return encodeURI(url)
   }
 }
 

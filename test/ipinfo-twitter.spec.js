@@ -19,7 +19,7 @@ describe('Ping IpInfo Test', () => {
     twitterToken.set(token)
     const url = 'pi.local'
     twitterUrl.set(url)
-    const uri = `pi.local?token=${encodeURI(token)}`
+    const uri = `pi.local`
     const actual = ipInfoTwitter.getTwitterUrl()
     assert.equal(actual, uri)
   })
