@@ -1,6 +1,6 @@
 class IpInfo {
   getAccessToken () {
-    return null
+    return process.env['IP_INFO_TOKEN']
   }
 }
 
