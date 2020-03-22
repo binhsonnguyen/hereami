@@ -14,10 +14,8 @@ class IpInfoTwitter {
 
   async tweet () {
     const token = this.twitterToken.getValue()
-    let params = {
-      data: { token: token }
-    }
-    const response = await axios.post(this.getTwitterUrl(), params)
+    let data = { token: token }
+    const response = await axios.post(this.getTwitterUrl(), data)
   }
 
   getTwitterUrl () {
