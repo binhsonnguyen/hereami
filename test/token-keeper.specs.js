@@ -7,8 +7,15 @@ describe('Token Keeper Test', () => {
     let key = 'foo'
     let value = 'bar'
     process.env[key] = value
-    let keeper = new TokenKeeper(key, value)
+    let keeper = new TokenKeeper(key)
     assert.equal(keeper.getKey(), key)
     assert.equal(keeper.getValue(), value)
+  })
+
+  it('should return empty token when no one there', () => {
+    let key = 'foo'
+    delete process.env[key]
+    let keeper = new TokenKeeper(key)
+    assert.equal(keeper.getValue(), '')
   })
 })
