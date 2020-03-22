@@ -8,6 +8,14 @@ export class TokenKeeper {
   }
 
   getValue () {
-    return process.env[this.getKey()]
+    return process.env[this.getKey()] || ''
+  }
+
+  set (value) {
+    process.env[this.getKey()] = value || ''
+  }
+
+  unset () {
+    delete process.env[this.getKey()]
   }
 }
