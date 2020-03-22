@@ -4,7 +4,7 @@ class IpInfo {
   }
 
   getAccessToken () {
-    return process.env['IP_INFO_TOKEN']
+    return process.env['IP_INFO_TOKEN'] || ''
   }
 }
 
