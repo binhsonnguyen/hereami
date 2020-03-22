@@ -43,8 +43,7 @@ describe('Ping IpInfo Test', () => {
   })
 
   it('should get ip information', async function () {
-    const token = ipinfo.getAccessToken()
-    const specs = await ipinfo.getIpSpecs(token)
+    const specs = await ipinfo.getIpSpecs()
     assert(specs != null)
   })
 })

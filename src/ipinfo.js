@@ -1,6 +1,17 @@
+const axios = require('axios')
+
 class IpInfo {
-  async getIpSpecs (token) {
-    return null
+  constructor () {
+    axios.interceptors.request.use(request => {
+      console.log('Starting Request', request)
+      return request
+    })
+  }
+
+  async getIpSpecs () {
+    const response = await axios.get(this.getAccessUrl())
+    console.log(response.data)
+    return response.data
   }
 
   getAccessUrl () {
