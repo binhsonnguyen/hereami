@@ -6,12 +6,18 @@ class IpInfoTwitter {
   constructor () {
     this.twitterToken = new TokenKeeper('TWITTER_TOKEN')
     this.twitterUrl = new TokenKeeper('TWITTER_URL')
-    if (process.env.DEBUG === 'true') {
-      axios.interceptors.request.use(request => {
-        console.log('Starting Request', request)
-        return request
-      })
+    axios.interceptors.request.use(request => {
+      console.log('Starting Request', request)
+      return request
+    })
+  }
+
+  async tweet () {
+    const token = this.twitterToken.getValue()
+    let params = {
+      data: { token: token }
     }
+    const response = await axios.post(this.getTwitterUrl(), params)
   }
 
   getTwitterUrl () {
