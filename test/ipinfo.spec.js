@@ -1,42 +1,19 @@
 import ipinfo from '../src/ipinfo'
+import { TokenKeeper } from '../src/token-keeper'
 
 const assert = require('assert')
 
-const originalToken = 'IP_INFO_TOKEN' in process.env ? process.env.IP_INFO_TOKEN : ''
-
-function placeTokenEnv (token) {
-  process.env['IP_INFO_TOKEN'] = token
-}
-
-function removeTokenEnv () {
-  delete process.env.IP_INFO_TOKEN
-}
-
-function restoreTokenEnv () {
-  process.env.IP_INFO_TOKEN = originalToken
-}
+const ipInfoToken = new TokenKeeper('IP_INFO_TOKEN')
+const originalToken = ipInfoToken.getValue()
 
 describe('Ping IpInfo Test', () => {
   afterEach(() => {
-    restoreTokenEnv()
-  })
-
-  it('should get right token', () => {
-    const token = 'foo bar'
-    placeTokenEnv(token)
-    const actual = ipinfo.getAccessToken()
-    assert.equal(actual, token)
-  })
-
-  it('should return empty token when no one there', () => {
-    removeTokenEnv()
-    const actual = ipinfo.getAccessToken()
-    assert.equal(actual, '')
+    ipInfoToken.set(originalToken)
   })
 
   it('should generate right access url', () => {
     const token = 'foo bar'
-    placeTokenEnv(token)
+    ipInfoToken.set(token)
     const url = `https://ipinfo.io?token=${encodeURI(token)}`
     const actual = ipinfo.getAccessUrl()
     assert.equal(actual, url)
