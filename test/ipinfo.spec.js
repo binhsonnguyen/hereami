@@ -9,6 +9,12 @@ describe('Ping IpInfo Test', () => {
     assert.equal(actual, token)
   })
 
+  it('should return empty token when no one there', () => {
+    delete process.env.IP_INFO_TOKEN
+    const actual = ipinfo.getAccessToken()
+    assert.equal(actual, '')
+  })
+
   it('should generate right access url', () => {
     const token = 'foo bar'
     const url = `https://ipinfo.io?token=${token}`
