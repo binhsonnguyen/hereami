@@ -3,7 +3,8 @@ class IpInfo {
     return null
   }
 
-  generateAccessUrl (token) {
+  getAccessUrl () {
+    const token = encodeURI(this.getAccessToken())
     return `https://ipinfo.io?token=${token}`
   }
 
