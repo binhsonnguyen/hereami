@@ -3,6 +3,10 @@ class IpInfo {
     return null
   }
 
+  generateAccessUrl (token) {
+    return `https://ipinfo.io?token=${token}`
+  }
+
   getAccessToken () {
     return process.env['IP_INFO_TOKEN'] || ''
   }
