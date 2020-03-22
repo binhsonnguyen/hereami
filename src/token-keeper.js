@@ -8,7 +8,7 @@ export class TokenKeeper {
   }
 
   getValue () {
-    return process.env[this.getKey()] || ''
+    return this.getKey() in process.env ? process.env[this.getKey()] : undefined
   }
 
   set (value) {

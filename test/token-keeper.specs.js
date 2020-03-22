@@ -12,11 +12,11 @@ describe('Token Keeper Test', () => {
     assert.equal(keeper.getValue(), value)
   })
 
-  it('should return empty token when no one there', () => {
+  it('should return undefined when no one there', () => {
     let key = 'foo'
     delete process.env[key]
     let keeper = new TokenKeeper(key)
-    assert.equal(keeper.getValue(), '')
+    assert.equal(keeper.getValue(), undefined)
   })
 
   it('should set token value', () => {
