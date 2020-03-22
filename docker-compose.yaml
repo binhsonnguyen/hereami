@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  hereami:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs:12
+    container_name: hereami
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - IP_INFO_TOKEN=$IP_INFO_TOKEN
+      - TWITTER_URL=$TWITTER_URL
+      - TWITTER_TOKEN=$TWITTER_TOKEN
+      - TWITTER_INTERVAL=$TWITTER_INTERVAL
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+volumes:
+  node_modules:
