@@ -9,6 +9,13 @@ describe('Ping IpInfo Test', () => {
     assert.equal(actual, token)
   })
 
+  it('should generate right access url', () => {
+    const token = 'foo bar'
+    const url = `https://ipinfo.io?token=${token}`
+    const actual = ipinfo.generateAccessUrl()
+    assert.equal(actual, url)
+  })
+
   it('should get ip information', async function () {
     const token = ipinfo.getAccessToken()
     const specs = await ipinfo.getIpSpecs(token)
