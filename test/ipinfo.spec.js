@@ -2,6 +2,8 @@ import ipinfo from '../src/ipinfo'
 
 const assert = require('assert')
 
+const originalToken = 'IP_INFO_TOKEN' in process.env ? process.env.IP_INFO_TOKEN : ''
+
 function placeTokenEnv (token) {
   process.env['IP_INFO_TOKEN'] = token
 }
@@ -10,7 +12,15 @@ function removeTokenEnv () {
   delete process.env.IP_INFO_TOKEN
 }
 
+function restoreTokenEnv () {
+  process.env.IP_INFO_TOKEN = originalToken
+}
+
 describe('Ping IpInfo Test', () => {
+  afterEach(() => {
+    restoreTokenEnv()
+  })
+
   it('should get right token', () => {
     const token = 'foo bar'
     placeTokenEnv(token)
