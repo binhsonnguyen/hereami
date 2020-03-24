@@ -19,7 +19,7 @@ export class IpInfoTwitter {
         console.error('co loi', e.message)
       }
       this.start()
-    }, this.interval.getValue() || 30000)
+    }, this.interval.getValue() || 60000)
   }
 
   async tweet (ipInfo) {
